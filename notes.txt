@@ -1,0 +1,33 @@
+react dom is a bridge between react and browsers
+In cdn we have 2 links
+1.core react link 
+2.react-dom-link
+
+ const heading= React.createElement("h1", {}, "Hello world");
+ const root=ReactDOM.createRoot(document.getElementById("root"));
+    root.render(heading);
+
+{}==>It is used for providing attributes to the elements or tags
+{id:"heading"}
+React.createElement() is an object  ->it is used to create a html elements.
+heading is a react element.
+render method converts the object{React.createElement()}  into h1 tagand put it on the browser.
+
+
+why we should not place reactdom cdn before react cdn?
+ChatGPT
+When using React and ReactDOM with CDN links in a web page, it is important to include the React CDN before the ReactDOM CDN. Here's why:
+
+React is the core library for building user interfaces, and ReactDOM is the package specifically responsible for rendering React components into the browser DOM (Document Object Model). ReactDOM depends on React to be available before it can work correctly.
+
+By including React before ReactDOM, you ensure that the React library is loaded and available in the global scope before ReactDOM attempts to use it. This ensures that ReactDOM can access and utilize the necessary functions and components provided by React.
+
+If you were to include ReactDOM before React, you would likely encounter errors because ReactDOM would not be able to find the required React functions and components it relies on.
+
+To summarize, the correct order is:
+
+html
+Copy code
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+By following this order, you ensure that React is loaded first, followed by ReactDOM, allowing your React components to be rendered correctly.
