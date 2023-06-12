@@ -11,7 +11,7 @@ In cdn we have 2 links
 {id:"heading"}
 React.createElement() is an object  ->it is used to create a html elements.
 heading is a react element.
-render method converts the object{React.createElement()}  into h1 tagand put it on the browser.
+render method converts the object{React.createElement()}  into h1 tag and put it on the browser.
 
 
 why we should not place reactdom cdn before react cdn?
@@ -31,3 +31,147 @@ Copy code
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
 By following this order, you ensure that React is loaded first, followed by ReactDOM, allowing your React components to be rendered correctly.
+
+
+
+Git and github are different.
+Github is a place where we can host repositories.
+Git is a version control system that helps manage changes in files and directories, while GitHub is a web-based platform that provides hosting, collaboration, and additional features for Git repositories. Git is the underlying technology, while GitHub is a service built around Git.
+
+git remote add origin https://github.com/Gouthami-D/reactjs-practice.git       ==============> to set up our local with remote repository
+
+
+npm 
+===
+npm manages the packages but does not stand for node package manager.
+It is a repository which containes all the packages.
+
+package.json:
+============
+It contains all the configuration for npm.It keeps a track of what version of package is installed into our system (It contains ^caret symbol like ^2.9.1(means it can contain minor version changes like 2.9.2,2.9.3 etc upto 2.9.9))
+It is in a json format like name,description, version etc
+packages are also known as dependencies which we install in our application through npm repository.
+npm will take care of the version of the package which we are using in the package.json.
+
+packagelock.json:
+=================
+It keeps track of the exact version of all the packages or dependencies  which are installed into our system.
+
+
+Bundler:
+=========
+Before we send our code to production we need to minify,compress,bundle,clean our css,js,html files using bundler.
+Bundler helps us to bundle the code.So, that we can send our code to production.
+Some of the examples of bundlers are webpack,parcel,rollup etc..
+
+
+Dependencies:
+=============
+There are two types of dependencies an app can have.
+npm install -D parcel --->DEV dependency(This dependency is used in development phase )
+A dev dependency (short for development dependency) refers to a package or library that is required during the development process but is not necessary for the production or runtime environment of the software.
+
+npm i bootstrap------>NORMAL dependency  (THis dependency is used in production also)
+
+Differences between dev dependency and normal dependency:
+=========================================================
+It's important to distinguish between dev dependencies and regular dependencies (also known as runtime dependencies or production dependencies), which are the packages or libraries necessary for the software to run correctly in the production environment.
+Regular dependencies are typically specified separately from dev dependencies to ensure that only the necessary dependencies are installed and included in the production environment.
+
+"devDependencies": {
+    "parcel": "^2.9.1"
+  }
+^ (caret)--> It upgrades to any minor version changes.The caret symbol is used to specify a version range that allows for non-breaking updates.
+~ (tilde)--> It upgrades to any major version changes.The tilde symbol is used to specify a version range that allows for patch updates.
+
+
+
+NodeModules:
+===========
+Node modules are the 
+If we install one package we get so many nodemodules for that package why?
+Because for example if we install bootstrap we get so many other packages along with bootstrap.Because bootstrap is a project which is dependent on some other packages.These other packages depend on other packages to complete the application.This type of dependency is called as "Transitive dependency".So, we have so many packages.
+
+If we delete our nodemodules in our application, we can recreate it again by using package and packagelock.json because these files stores the information about all the dependencies.
+we can get the node modules again by npm install
+				     ============
+.gitignore:
+===========
+we can push nodemodules to the gitignore file
+/node_modules -> git will ignore these nodemodules and takes all the other files										
+
+
+npx parcel index.html ==>Command used to execute the parcel with entry point as index.html(called as src).
+parcel goes into the index.html and builds a development build for our application and hosts our application on the localhost:1234
+
+Difference between installing and executing a package?
+
+
+====***=====
+To bring react into our application we used "cdn links" earlier.
+But using cdn links is not a preferred way to bring react and reactdom into our application.
+"BUT WHY?"
+==========
+<script crossorigin 
+ src="https://unpkg.com/react@18/umd/react.development.js">
+</script>
+
+1.This cdn link makes another network call to unpkg.com it would be easier for us if we have react as a dependency in package.json(nodemodules) to avoid the network call.
+
+2.src="https://unpkg.com/react@18/umd/react.development.js" in this we have react@18 if in future the version changes we need to change the url for updation statically.If we have that as a dependency .
+
+Parcel
+======
+
+Parcel creates seperate production  and development bundles:
+----------------------------------------------------------
+Development build is stored in dist folder.
+command:npx parcel index.html 
+When we run the command(execute) parcel will generates the development build of our project and will host onto localhost:1234. when we refresh our page it uses parcel-cache to update our page using hot module replacement.
+-------- -----------------------
+Production build is stored in dist folder
+command:npx parcel build index.html
+when we run the command parcel will generates the production build in dist folder and 3 files will be build 1 html,1 js, 1 css file.
+These 3 files will contain all the code of your application and it is the production ready code
+
+
+Conclusion:
+============
+Why react is fast?
+Because react contains all the tools which helps it to run in short span like parcels,bundlers,dist,
+parcel-cache, all these makes the react app faster. These all other packages have transitive dependencies.
+
+**--To avoid the command to type always in the terminal --**
+we write in package.json in scripts as 
+"scripts": {
+    "start":"parcel index.html",
+     "build":"parcel build index.html",
+     "test": "jest"
+  },
+
+  we execute our application directly by 
+  == npm run start (or) npm start  ==
+  **To build the application npm run build** npm build doesn't work
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
