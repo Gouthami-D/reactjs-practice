@@ -152,6 +152,47 @@ we write in package.json in scripts as
   we execute our application directly by 
   == npm run start (or) npm start  ==
   **To build the application npm run build** npm build doesn't work
+
+
+  Episode 3
+  ==========
+React.createElement  is an =>object=>when root.render is called ReactDom takes the object and converts into html and push it to the browser
+React.createElement =>object=> HTMLElment(render)=>object is converted to html in the DOM by reactdom
+
+const heading=React.createElement("h1",{id:"heading"},"This is reactjs");
+const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(heading)
+console.log(heading)
+
+Replaces everything inside the root by heading
+
+ <div id="root">
+    <h1>React js tutorial</h1> --------------->replaced by heading
+</div>
+
+
+JSX is a HTML like (or) XML like syntax but not html or xml
+===========================================================
+const heading = <h1>This is reactjs</h1> is a jsx syntax for createElement similar to react
+
+const heading=React.createElement("h1",{id:"heading"},"This is reactjs"); and const heading = <h1>This is reactjs</h1> are similar.
+
+Javascript understands ECMAscript(es6)
+Babel transpiles the jsx code to browser understandable language
+
+differences between jsx and html
+1. In html we use class  and in jsx we use className .
+2.If we want to provide attributes in jsx we need to use camelCase like className="hello" (className is camel case)
+
+React functional components
+===========================
+It is a normal js function which returns jsx or function which returns a react element. 
+const HeadingComponent=()=>{
+  return <h1>React functional component</h1>
+}
+
+
+
  
 
 
