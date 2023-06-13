@@ -164,6 +164,10 @@ const root=ReactDOM.createRoot(document.getElementById("root"));
 root.render(heading)
 console.log(heading)
 
+rendered
+========
+replaces everything inside root.
+
 Replaces everything inside the root by heading
 
  <div id="root">
@@ -190,6 +194,27 @@ It is a normal js function which returns jsx or function which returns a react e
 const HeadingComponent=()=>{
   return <h1>React functional component</h1>
 }
+
+component composition
+======================
+placing one component inside the other
+
+const Navbar=()=>{
+    return <h1>Navbar</h1>
+}
+
+const Heading=()=>{
+  return <h1>hello</h1>
+  <Navbar/>  --->another component
+}
+root.render(<Heading/>)
+
+
+jsx must and should have only one root element
+
+React Fragment
+==============
+It behaves like an empty tag
 
 
 
