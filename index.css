@@ -1,0 +1,63 @@
+.explore-menu-section {
+    background-color: white;
+    display: block;
+
+}
+
+.menu-head {
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 28px;
+    color: #183b56;
+    padding-left: 6px;
+}
+
+.image-card {
+    border-radius: 16px;
+}
+
+.menu-title {
+    color: #323f4b;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 15px;
+}
+.cuisine {
+    color: #e27420;
+    font-family: "Roboto";
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.rating{
+    font-family: "Roboto";
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.restaurant-name{
+    color: #323f4b;
+    font-family: "Roboto";
+    font-size: 19px;
+    font-weight: 500;
+    margin-top: 24px;
+}
+
+.menu-item-link {
+    color: #d0b200;
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.menu-item-card {
+    border-radius: 16px;
+    transition: 0.2s ease-in-out;
+       
+}
+
+.menu-item-card:hover{
+  transform: translateY(20px);
+}

@@ -216,9 +216,29 @@ React Fragment
 ==============
 It behaves like an empty tag
 
+Inline styling in reactjs:
+==========================
+<div className="card" style={{backgroundColor:"green"}}>
+<h1>Hello</h1>
+</div>
 
+first {} =>indicates inside there is some javascript code
+second{} =>indicates that is an javascript object.
+
+Props:
+=====
+Component is just a normal javascript function.
+Props are just the normal arguments to a function.
+when we want to dynamically pass some data to the component we pass as props.
 
  
+ Config Driven UI:
+ =================
+A configuration-driven UI is an approach where the layout, structure, and behavior of the user interface are defined by a configuration file or data instead of hard-coding them in the application code. 
+This allows for easy customization and dynamic changes to the UI without requiring modifications to the underlying codebase.
+
+
+Controlling the UI with data by using config(data).
 
 
 
