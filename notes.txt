@@ -241,6 +241,26 @@ This allows for easy customization and dynamic changes to the UI without requiri
 Controlling the UI with data by using config(data).
 
 
+Map function:
+=============
+MAp function is used to iterate over array of objects in tha data
+const response = [
+  { id: 1, name: 'John', age: 25 },
+  { id: 2, name: 'Jane', age: 30 },
+  { id: 3, name: 'Bob', age: 35 }
+];
+
+{response.map((item)=>{
+
+})}
+
+index.js:1 Warning: Each child in a list should have a unique "key" prop.
+==========================================================================
+unique key or id should be important during map because without key whenever a new element is inserted in the beginning of the dom.  it re-renders the whole elements in the dom again. 
+But if we have key for every element it check the id's or keys .It gets inserted at the specific place .
+
+
+
 
 
 
