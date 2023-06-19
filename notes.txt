@@ -259,6 +259,139 @@ index.js:1 Warning: Each child in a list should have a unique "key" prop.
 unique key or id should be important during map because without key whenever a new element is inserted in the beginning of the dom.  it re-renders the whole elements in the dom again. 
 But if we have key for every element it check the id's or keys .It gets inserted at the specific place .
 
+folder structure:
+=================
+If any hard-coded data is there in our componenets just place it in seperate folder called utils or common.
+In that folder name the file as constants.js with lowercase because it is not a component.
+
+Exports"
+=======
+Named export:If we want to export multiple things  from the same file we use named export.
+named export ehile importing must be wrapped up in curly braces.
+import { resList } from '../utils/Data'
+
+Example:
+========
+export const LOGO_URL="https://img.freepik.com/free-vector/cute-girl-chef-holding-tray-platter-plate-banner-logo-cartoon-art-illustration_56104-879.jpg?w=826&t=st=1686659942~exp=1686660542~hmac=c7ac8ece954acfe44f309c426349010d3d15ccaa4e0496a5b42fe8bf1601200f"
+
+Default export:With default export we can export only single thing or component through a single file
+
+Example:
+========
+export default Header;=>at the end of the file
+
+Event Handlers:
+===============
+Onclick takes the call back as an argument .This callback function is called when a button is clicked.
+
+React Hooks:
+=============
+A hook is a normal js function.
+
+UseState:
+========
+It is a state variable .Because,
+It maintains the state of our componenet.
+when we call the useState function it gives the state variable and we recieve that variable inside the array.
+const[myvariable]=useState()
+we pass the initial value or default value in useState([]) for example empty array. And that default value becomes the intial value for the variable(myvariable).
+and we use that variable normally with the name while mapping or looping
+ 
+ const[resList]=useState([
+        {
+            "data": {
+                "id": "10069",
+                "name": "Shree Santosh Family Dhaba",
+                "cloudinaryImageId": "pro9wrdscz7nd8ezzrwg",
+                "cuisines": [
+                    "Punjabi",
+                    "North Indian",
+                    "Chinese",
+                    "Tandoor"
+                ],
+                "costForTwoString": "₹400 FOR TWO",
+                "slaString": "37 MINS",
+                "address": "3-5-890, Paras Chambers, Telugu Academy Lane,Himayath Nagar, Hyderabad",
+                "avgRating": "4.2",
+    
+            },
+            
+        },
+        {
+            "data": {
+                "id": "10069",
+                "name": "Shree Santosh Family Dhaba",
+                "cloudinaryImageId": "pro9wrdscz7nd8ezzrwg",
+                "cuisines": [
+                    "Punjabi",
+                    "North Indian",
+                    "Chinese",
+                    "Tandoor"
+                ],
+                "costForTwoString": "₹400 FOR TWO",
+                "slaString": "37 MINS",
+                "address": "3-5-890, Paras Chambers, Telugu Academy Lane,Himayath Nagar, Hyderabad",
+                "avgRating": "4.0",
+    
+            },
+            
+        }
+    ])
+ Important
+ ==========
+ When ever the state variable updates react re-renders the component
+
+React state variable vs normal js variable
+===========================================
+
+There are several differences between a normal JavaScript variable and a React state variable:
+
+Declaration and Initialization: In JavaScript, you can declare and initialize a normal variable using the var, let, or const keywords. In React, state variables are declared and initialized using the useState hook.
+
+Mutability: In JavaScript, normal variables can be mutated directly by assigning new values to them. In React, state variables are immutable, meaning you cannot directly assign new values to them. Instead, you update state variables using the setState function provided by the useState hook.
+
+Component Re-rendering: When a state variable in React changes its value using the setState function, the component that owns the state variable will re-render to reflect the updated state. Normal variables in JavaScript do not trigger component re-renders.
+
+Scope: Normal JavaScript variables have function or block scope, depending on how they are declared using var, let, or const. React state variables have component scope and are accessible only within the component that declares them.
+
+Asynchronous Updates: When updating a state variable in React using setState, the new value is not immediately available for use within the same function. React batches state updates for performance reasons, so you can't rely on the updated value immediately. JavaScript variables, on the other hand, are updated synchronously.
+
+It's important to note that React state variables are specifically designed for managing component state within the React framework. They provide a way to store and update values that can trigger component re-renders. Normal JavaScript variables, on the other hand, are used for general-purpose data storage and manipulation within JavaScript applications.
+
+
+React Reconciliation:(reconciliation means whenever something changes on UI)
+=====================
+It is known as React Fiber.React fiber is nothing but its a new of finding the diff(difference) between two virtual doms(olad and new)( which are in the form of objects) and updating the dom.
+It is introduced in React16 to update the dom.
+
+
+Virtual dom:it is a representation of real DOM 
+============
+React.createElement() is a virtual dom.and it is an object as mentioned in line 373.
+Real dom is what we see in the elements tab in inspect element with all the tags <div><h1></h1></div>.
+
+
+const heading= React.createElement("h1", {}, "Hello world");
+ const root=ReactDOM.createRoot(document.getElementById("root"));
+    root.render(heading);
+
+{}==>It is used for providing attributes to the elements or tags
+{id:"heading"}
+React.createElement() is an object  ->it is used to create a html elements.
+heading is a react element.
+render method converts the object{React.createElement()}  into h1 tag and put it on the browser.
+
+It converts 
+
+
+
+
+
+
+
+
+
+
 
 
 
