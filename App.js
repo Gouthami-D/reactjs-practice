@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import Header from "./components/Header";
-import FoodCards from "./components/FoodCards";
-import Body from "./components/Body";
+import Header from "./src/components/Header";
+import FoodCards from "./src/components/FoodCards";
+import Body from "./src/components/Body";
 //Nested html elements creation 
 
 // const parent= React.createElement("div",{id:"parent"}, 
