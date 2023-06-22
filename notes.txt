@@ -381,8 +381,29 @@ React.createElement() is an object  ->it is used to create a html elements.
 heading is a react element.
 render method converts the object{React.createElement()}  into h1 tag and put it on the browser.
 
-It converts 
+API calls in reactjs
+====================
+We can fetch the data from backend using 2 approaches
 
+Page loads ===> call API(wait for data to come for some 1000ms ) ===> Render it on UI
+
+Page loads ===> Render skeleton ===> call API(wait for data to come) ===> Render it on UI
+in react render cycles are very fast.
+
+
+UseEffect Hook:
+===============
+It is a function which takes 2 arguments 
+1.Arrow function which is a Call back function 
+2.Dependency array
+useEffect(()=>{},[])
+
+
+The call back function is called after the component is rendered (Body is rendered (Dom or component)).
+Immediately after the component is rendered  on the DOM useEffect is called and the first argument arow function is executed.
+
+CORS 
+====
 
 
 
