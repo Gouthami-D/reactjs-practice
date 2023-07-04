@@ -1,16 +1,20 @@
+import React from "react";
 import { CDN_IMAGE_URL } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 export const FoodCards = (props) => {
     const {resData}= props;
-    const {cloudinaryImageId,name,cuisines,costForTwoString,avgRating,deliveryTime}=resData.data
-    console.log(props)
+    const {cloudinaryImageId,name,cuisines,costForTwoString,avgRating,deliveryTime,id}=resData.data
+    console.log(id,"id")
     return (
       <div className="explore-menu-section col-sm-12 col-md-3">
       <div className="container">
           <div className="row">
               <div className="">
                   <div className="shadow menu-item-card p-3 mb-3">
-                      <img src={CDN_IMAGE_URL+cloudinaryImageId} className="image-card img-fluid w-100" />
+                    <Link  to={"restaurant/"+id}>
+                           <img src={CDN_IMAGE_URL+cloudinaryImageId} className="image-card img-fluid w-100" />
+                    </Link>
                       <h2 className="restaurant-name">{name}</h2>
                       {/* <h1 className="menu-title">{resObj.data.}</h1> */}
                       <h1 className="cuisine">{cuisines.join(", ")}</h1>                     
@@ -28,6 +32,7 @@ export const FoodCards = (props) => {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="#d0b200" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
                       </svg>
+                     
               </div>
               </div>
             </div>

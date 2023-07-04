@@ -296,7 +296,8 @@ when we call the useState function it gives the state variable and we recieve th
 const[myvariable]=useState()
 we pass the initial value or default value in useState([]) for example empty array. And that default value becomes the intial value for the variable(myvariable).
 and we use that variable normally with the name while mapping or looping
- 
+It is used for creating a local state variable inside the functional components.
+
  const[resList]=useState([
         {
             "data": {
@@ -397,41 +398,174 @@ It is a function which takes 2 arguments
 1.Arrow function which is a Call back function 
 2.Dependency array
 useEffect(()=>{},[])
+  1.if no dependency array is present => useEffect is called on every render
+  2.if there is empty dependency array =>useEffect is called on initial render of the component
+  3.if there is dependency inside the dependency array=>useEffect is called everytime whenvever the depenedency is updated. 
 
 
 The call back function is called after the component is rendered (Body is rendered (Dom or component)).
 Immediately after the component is rendered  on the DOM useEffect is called and the first argument arow function is executed.
 
-CORS 
+
+****whenever a API call is made through useEffect hook to display the data on the UI we use state variables(useState hook)
+We fetch the data from the api and we store it in a local state variable whenever the statevariable updates the UI upddates.****
+
+CORS
 ====
 
+UseState:
+=========
+Whenever the state variable updates whole component is rendered (reconciliation occurs).
+
+React router dom:
+-----------------
+createBrowserRouter  provides the configuration
+routerProvider provides the routing configuration to our application
+
+For errors also we can use errorElement to display any routes which is not defined in our application
+
+import { createBrowserRouter,RouterProvider } from "react-router-dom";
+const appRouter=createBrowserRouter([
+    {
+    path: "/",
+    element: <App />,
+    errorElement:<Error/>
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />
+    },
+  ])
+  const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={appRouter}/>)
+
+<Link>:
+=======
+To navigate from one page to another page we should not use <a></a> tag because the whole app gets refreshed.
+TO avoid that app reload we use <Link></Link> tag 
+<Link> just refreshes the component.
+
+Single page application:
+========================
+Single page i.e, One page just the components get interchanged.
+
+Routing types:
+==============
+Client side routing:
+Server side rendering: Here we fetch the routes through the api call.
 
 
+Dynamic routing :
+================
+useParams(): By using this hook from react-router-dom we pass the route dynamically.
 
 
+Class Components:
+================
+class is a keyword which is used to create class components.
+extends React.Component it explains that the created component is a class component.
+render() will return the jsx.
+
+props in class component:
+=========================
+
+import React from "react";
+
+class UserClass extends React.Component {
+    constructor(props){
+        super(props)
+        console.log(props);
+
+        this.state={
+            count:0
+        }
+    }
+    render(){
+
+        const {name,email,designation} =this.props
+        const {count}=this.state
+
+        return(
+            <>
+            {/* <h1>Count: {this.state.count}</h1> before destructuring */}
+            <h1>Count: {count}</h1>
+            <h2>{name}</h2>
+            <h2>{email}</h2>
+            <h2>{designation}</h2>
+            </>
+        )
+    }
+}
+
+export default UserClass
 
 
+state in class components:
+==========================
+We will write multiple state variables in this.state{}.
+This is a global object which holds all the states in the component.
+
+NEVER UPDATE STATE VARIABLES DIRECTLY. LIKE this.state.count=this.state.count+1 
+
+whenever react comes to the setState() function to update the value it goes to the this.state{} object and updates only the variables in the function.
+And does not touches all the variables in the global state i.e, this.state.
+
+state in functional components:
+==============================
+Here we write seperate state variables for every state variable.
 
 
+LifeCycle of  a component:
+==========================
+Component Did Mount():
+=====================
+How a component is mounted or loaded on DOM or webpage?
+
+whenever <About/> component is loaded on the dom it renders the jsx inside the About page.
+IN <About/> component there is another component called UserClass which is a class based component.
+Whenever it reads the class based component an instance is created.After creating an instance constructor is called and then render is called.
+
+<About/>=====><UserClass/>=======>constructor======>render()  
+
+when we have both parent class component and child class component
+<Parent class component> constructor,render,[componentDidMount-->called after (1)(2)]
+  <Child class component/>constructor,render,[componentDidMount()-->(1)]
+<Parent>
+
+<Parent/>class Component==>parent constructor ==>parent render ===> child constructor ===> child render ==>child componentDidMount ==> parent ComponentDidMOunt
 
 
+when we have both parent class component and child class component
+<Parent class component>   [constructor,render]
+
+-------render phase for children begins -------------
+
+    <Child1 class component/>[constructor,render]
+    <Child2 class component/>[constructor,render]
+
+-------render phase for children ends-----------------    
+
+    After this steps diff is calculated and reconciliation triggers and it is batched and dom is updated for both the components at a time.Performance is optimised by this batching.
+    <DOM UPdated -IN single batch> 
+
+-------commit phase for children begins---------
+
+  child1 componentDidMount()
+  child2 componentDidMount()
+
+-------commit phase for cildrens ends------------
+
+  parent componentDidMount()
+
+<Parent>
+
+<Parent/>class Component==>parent constructor ==>parent render ===> child constructor ===> child render ==>child componentDidMount ==> parent ComponentDidMOunt
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Why ComponentDidMOunt()?
+========================
+TO make API calls

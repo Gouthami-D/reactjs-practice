@@ -5,6 +5,11 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import Header from "./src/components/Header";
 import FoodCards from "./src/components/FoodCards";
 import Body from "./src/components/Body";
+import About from "./src/components/About";
+import Contact from "./src/components/Contact";
+import Error from "./src/components/Error"
+import { createBrowserRouter,RouterProvider,Outlet } from "react-router-dom";
+import RestaurantMenu from "./src/components/RestaurantMenu";
 //Nested html elements creation 
 
 // const parent= React.createElement("div",{id:"parent"}, 
@@ -27,14 +32,44 @@ import Body from "./src/components/Body";
   const App=()=>{
     return(
       <>
+      {/* header needs to be there for all the pages but the body should change */}
+      {/* when we search for the specific route the outlet picks up that page and replaces the present page with the new page  */}
       <Header/>
-      <Body/>
+      <Outlet/>
       </>
     )
   }
 
+  const appRouter=createBrowserRouter([
+    {
+    path: "/",
+    element: <App />,
+    children:[    
+        {
+          path:"/",
+          element:<Body/>
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />
+        }, 
+        {
+          path: "/restaurant/:id",
+          element: <RestaurantMenu />
+        },   
+    ],
+    errorElement:<Error/>,
+    },
+  ])
+
+
+
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App/>)
+root.render(<RouterProvider router={appRouter}/>)
 
 
 

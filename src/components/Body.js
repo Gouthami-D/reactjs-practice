@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { resList } from '../utils/Data'
 import FoodCards from './FoodCards'
-import SkeletonCard from './Shimmer'
+import SkeletonCard from './SkeletonCard'
+import {Link} from "react-router-dom"
 
 const Body = () => {
     const [restaurantList, setRestaurantList] = useState([]);
+    const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+    const [searchRestaurant, setSearchRestaurant] = useState("")
 
     useEffect(() => {
         setTimeout(() => {
             fetchData()
-          }, "5000");
+        }, "1000");
         // console.log("useEffect called")
     }, [])
 
@@ -18,8 +21,21 @@ const Body = () => {
         const json = await data.json()
         console.log(data)
         setRestaurantList(json?.data?.cards[2]?.data?.data?.cards) //optional chaining
+        setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards) 
     }
 
+    const onChangeHandler = (e) =>{
+        setSearchRestaurant(e.target.value)
+    }
+
+    const onClickSearch = () =>{
+      console.log(searchRestaurant,"here")
+      const data =   restaurantList?.filter((filteredres) => filteredres.data.name.toLowerCase().includes(searchRestaurant.toLowerCase()))
+     if(data) {
+        setFilteredRestaurant(data)
+      }
+     
+    }
     // if(restaurantList == 0){
     //     const shimmerCards=Array.from({ length: 12 }, (_, index) => <Shimmer key={index} />)
     //     return <div className='d-flex flex-wrap'>{shimmerCards}</div>
@@ -30,25 +46,33 @@ const Body = () => {
             {
                 restaurantList == 0 ?
                     //  <div className='d-flex flex-row flex-wrap'><Shimmer noOfcount={10} /></div> :
-                    <SkeletonCard/>:
-                    
+                    <SkeletonCard count={100} /> :
+
                     <div>
-                        <button type="button" class="btn btn-primary m-2" onClick={() => {
-                            const filteredList = restaurantList?.filter((singlerestaurant) => singlerestaurant.data.avgRating > 4);
-                            console.log(filteredList, "reslist")
-                            // console.log("button cliked")
-                            setRestaurantList(filteredList)
-                        }
-                        }
-                        >
-                            Top rated restaurants</button>
+                        <div class="d-flex align-items-start">
+                            <div class="d-flex m-2">
+                                <input type="text" className='form-control' placeholder="Search restaurant" value={searchRestaurant}   onChange={(e) =>onChangeHandler(e)} />
+                                <button type="button" class="btn btn-primary" onClick={onClickSearch} >Search</button>
+
+                            </div>
+
+                            <div className='ms-auto'>
+                                <button type="button" class="btn btn-primary m-2" onClick={() => {
+                                    const filteredList = restaurantList?.filter((singlerestaurant) => singlerestaurant?.data?.avgRating > 4);
+                                    console.log(filteredList, "reslist")
+                                    // console.log("button cliked")
+                                    setFilteredRestaurant(filteredRestaurant)
+                                }
+                                }
+                                >
+                                    Top rated restaurants</button></div>
+                        </div>
                         <div className="container">
                             <div className="row">
-                                {restaurantList?.map((restaurantcard) => (
+                                {filteredRestaurant?.map((restaurantcard) => (
                                     <FoodCards key={restaurantcard.data.id} resData={restaurantcard} />
                                 ))
                                 }
-
                             </div>
                         </div>
                     </div>
