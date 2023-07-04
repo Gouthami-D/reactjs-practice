@@ -568,4 +568,91 @@ when we have both parent class component and child class component
 
 Why ComponentDidMOunt()?
 ========================
+Mounting is displaying the Component on DOM
 TO make API calls
+
+componentDidUpdate():
+==================
+when the user calls the [setState ] updation starts by updating the state variable.
+React triggers the render() function once again
+Then, after componentDidUpdate() is called.
+
+componentWillUnmount():
+=======================
+Unmounting is removing the component from the DOM
+when we move from one page to another page componentWillUnmount() will be called.
+
+import React from "react";
+
+class UserClass extends React.Component {
+    constructor(props){
+        super(props)
+        console.log(props);
+
+        this.state={
+            userInfo:{
+                name:"Dummy",
+                location:"Default"
+            }
+        }
+        console.log("construcor")
+    }
+
+    async componentDidMount(){
+        const data= await fetch("https://api.github.com/users/Gouthami-D");
+        const json= await data.json();
+        
+       
+        this.setState({ 
+            userInfo:json
+        })
+        
+        console.log(json,"jsonS")
+    }
+    
+    render(){
+
+        const {login,id,avatar_url} =this.state.userInfo
+        console.log("render")
+
+        return(
+            <> 
+            <img src={avatar_url}/>
+            <h2>{login}</h2>
+            <h2>{id}</h2>
+            </>
+        )
+    }
+}
+
+export default UserClass
+
+==========Mounting===================
+constructor(called with dummy data)
+render(called with dummy data)
+        <displays html dummy data on screen and dom>
+
+componentDidMount()is called.
+    We will Make an ApiCall
+    <this.setState>--state variable is updated
+
+======Mounting ends=========================
+
+===========Updation=====================
+
+  render(called with API data)
+  <html> --displays html on screen with new API data
+
+  componentDidUpdate() is called.
+
+  ==========Updation Ends===================
+
+=============Unmounting()===============
+When we navigate to other pages componentWillUnmount() will be called at the end.
+
+
+
+
+
+
+
