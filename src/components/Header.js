@@ -1,6 +1,7 @@
 import {LOGO_URL} from "../utils/constants"
 import React,{useState,useEffect} from "react"
 import {Link} from "react-router-dom"
+import useOnlineStatus from "../utils/useOnlineStatus"
 const Header =()=>{
   const[btnName,setBtnName]=useState("Login")
 
@@ -11,7 +12,7 @@ const Header =()=>{
       console.log("Useeffect called")
     },[btnName])
 
-
+  const online=useOnlineStatus();
 
     return (
     <>
@@ -23,6 +24,12 @@ const Header =()=>{
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav ms-auto">
+        <div className="m-2">Online Status:{online? <span className="text-success p-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="8"/>
+</svg></span>:<span className="text-danger p-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="8"/>
+</svg></span>}</div>
+        <li className="nav-link active"><Link to="/grocery">Grocery</Link></li>
         <li className="nav-link active"><Link to="/"><p className="text-decoration-none">Home</p></Link></li>
         <li className="nav-link active"><Link to="/about">About Us</Link></li>
         <li className="nav-link active" ><Link to="/contact">Contact Us</Link></li>

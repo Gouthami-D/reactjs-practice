@@ -1,48 +1,55 @@
 import {useEffect,useState} from "react"
 import SkeletonCard from "./SkeletonCard"
+import useRestaurant from "../utils/useRestaurant";
 import { CDN_IMAGE_URL,MENU_API_URL } from "../utils/constants";
 import { useParams } from "react-router-dom";
 
 // whenever a API call is made through useEffect hook to display the data on the UI we use state variables(useState hook)
 // We fetch the data from the api and we store it in a local state variable whenever the statevariable updates the UI upddates.****
 const RestaurantMenu=()=>{
-    const[resInfo,setResInfo]=useState([])
-    const[menuItem,setMenuItem]=useState([])
+    // const[resInfo,setResInfo]=useState([])
+    // const[menuItem,setMenuItem]=useState([])
     const {id} =useParams()
+   
+    //custom hook logic
+    const resInfo=useRestaurant(id)
+
+    const menuItem=resInfo[1]
     // console.log(id,"param")
 
     // console.log(MENU_API_URL+id,"url");
 
-    useEffect(()=>{
-       fetchMenu()
-    },[])
+    // useEffect(()=>{
+    //    fetchMenu()
+    // },[])
 
-    const fetchMenu = async() =>{
-        const data= await fetch(MENU_API_URL+id)
-        const json =await data.json()
-        console.log(json.data);
+    // const fetchMenu = async() =>{
+    //     const data= await fetch(MENU_API_URL+id)
+    //     const json =await data.json()
+    //     console.log(json.data);
 
-        const hotelData=json?.data?.cards[0]?.card?.card?.info;
+    //     const hotelData=json?.data?.cards[0]?.card?.card?.info;
 
-        const menuList=json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    //     const menuList=json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
-        setMenuItem(menuList)
+    //     setMenuItem(menuList)
 
-        setResInfo(hotelData)
+    //     setResInfo(hotelData)
 
-        console.log(menuList,"menu");     
-    }
+    //     console.log(menuList,"menu");     
+    // }
 
 
 
-    let {name,cuisines,costForTwoMessage,avgRating,cloudinaryImageId}=resInfo
+    let {name,cuisines,costForTwoMessage,avgRating,cloudinaryImageId}=resInfo[0]
 
     let {itemCards}=menuItem
 
 
 
-    console.log(resInfo,"hotal");
+    console.log(resInfo[0],"hotal");
     
+    console.log(menuItem,"menuItem")
     
     
 

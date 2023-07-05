@@ -3,6 +3,8 @@ import { resList } from '../utils/Data'
 import FoodCards from './FoodCards'
 import SkeletonCard from './SkeletonCard'
 import {Link} from "react-router-dom"
+import useOnlineStatus from '../utils/useOnlineStatus'
+import offline from '../assets/image/offline.jpg'
 
 const Body = () => {
     const [restaurantList, setRestaurantList] = useState([]);
@@ -40,6 +42,17 @@ const Body = () => {
     //     const shimmerCards=Array.from({ length: 12 }, (_, index) => <Shimmer key={index} />)
     //     return <div className='d-flex flex-wrap'>{shimmerCards}</div>
     // }
+
+        const online= useOnlineStatus();
+
+        if(online == false)
+        return(
+            <>
+              <h1 className='text-danger text-center'>Looks like you are offline !!</h1>
+              {/* <img src={offline}/> */}
+              </>
+        )
+
 
     return (
         <>
